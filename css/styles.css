@@ -7,8 +7,9 @@ body {
 
 header {
     background-color: #333;
-    color: #1ff8ff;
+    color: #13db23;
     padding: 10px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header .barra h1 {
@@ -28,8 +29,9 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: #1ff8ff;
+    color: #ffffff;
     text-decoration: none;
+    font-family: fantasy;
 }
 
 .intro {
@@ -72,3 +74,36 @@ footer {
     padding: 10px 0;
     margin-top: 20px;
 }
+h2 {
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+            color: #363636; /* Color del texto */
+            text-align: center; /* Centrado del texto */
+            margin: 20px 0; /* Márgenes */
+            transition: all 0.3s ease; /* Transición suave */
+}
+button {
+    background-color: #4CAF50; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 15px 30px; /* Relleno interno */
+    text-align: center; /* Centrado del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Inline-block para botones */
+    font-size: 16px; /* Tamaño del texto */
+    margin: 10px 2px; /* Márgenes */
+    border-radius: 50px; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+.titulo-inicio {
+            font-family: 'Arial', sans-serif; /* Fuente moderna */
+            color: #333; /* Color del texto */
+            background-color: #f0f0f0; /* Fondo suave */
+            padding: 15px 30px; /* Relleno interno */
+            text-align: center; /* Centrado del texto */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin: 20px 0; /* Márgenes */
+            transition: all 0.3s ease; /* Transición suave */
+        }
