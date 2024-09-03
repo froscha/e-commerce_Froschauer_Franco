@@ -1,1 +1,1 @@
-console.log("Como Estas?")
+const h4 = document.querySelector("h4")
