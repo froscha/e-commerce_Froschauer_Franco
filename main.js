@@ -6,6 +6,7 @@ img.src = 'https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app
 
 const p = document.querySelector('p');
 p.textContent = 'Auto clasico de verano';*/
+function sprint1() {
 const h1 = document.querySelector("h1");
 h1.innerText = "Productos";
 
@@ -24,6 +25,8 @@ for (let i = 1; i < 10; i++) {
 let container = document.querySelector(".container"); //seleccionamos para poder agregar la card.
 console.log("Intento " + cardsArray + "para ver si funciona");
 document.querySelector(".container").innerHTML = cardsArray.join('');
+}
+sprint1()
 
 /*cardsArray.push(card);
 document.querySelector(".container").innerHTML = cardsArray.join(''); 
