@@ -6,27 +6,43 @@ img.src = 'https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app
 
 const p = document.querySelector('p');
 p.textContent = 'Auto clasico de verano';*/
-function sprint1() {
-const h1 = document.querySelector("h1");
-h1.innerText = "Productos";
-
-let cardsArray = [];
-for (let i = 1; i < 10; i++) {
-    cardsArray.push(` 
-        <div class="card" style="width: 22rem; size= ">
-            <img src="https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app/${i}.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Tarjeta numero ${i}.</p>
-            </div>
-        </div>
-    `); //batiks para el contenido
-}
-
-let container = document.querySelector(".container"); //seleccionamos para poder agregar la card.
-console.log("Intento " + cardsArray + "para ver si funciona");
-document.querySelector(".container").innerHTML = cardsArray.join('');
-}
-sprint1()
+function cards() {
+    let h1 = document.querySelector("h1");
+  h1.innerHTML = "Productos";
+  let contenedor = document.querySelector(".container");
+  
+  let arr = [];
+  
+  for (let i = 1; i <= 9; i++) {
+      arr.push(`
+          <div class="card">
+    <img src="https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app/${i}.jpg" class="card-img-top" alt="Auto">
+    <div class="card-body">
+      <h5 class="card-title">Card ${i}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="producto.html" class="btn btn-primary">Ver más</a>
+    </div>
+  </div>
+  `);
+  }
+  
+  contenedor.innerHTML = arr.join(``);
+  
+  }
+  
+  cards();
+  
+  // let user = {
+  //   username:"Gabriel",
+  //   edad:4,
+  // };
+  
+  // let propiedad="username";
+  
+  // alert(user[propiedad]);//dinamico
+  // alert(user.username);//no dinamico
+//<button>Ver Mas</button>
+//}
 
 /*cardsArray.push(card);
 document.querySelector(".container").innerHTML = cardsArray.join(''); 
