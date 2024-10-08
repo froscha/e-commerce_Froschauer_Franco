@@ -29,7 +29,10 @@ const producto1 = new Producto("Auto 1", "Es rapidisimo", "$59999", "4", "https:
 let contenedor = document.querySelector(".cards-productos");
 
 contenedor.innerHTML=producto1.verHtml();
-/*class producto {
+
+
+
+    /*class producto {
     constructor(titulo, detalle, precio, stock, imagen);{
         this.titulo = titulo;
         this.detalle = detalle;
