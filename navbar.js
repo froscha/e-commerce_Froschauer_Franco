@@ -1,7 +1,55 @@
-let menu = [
+// Array con las categorías de la tienda, cada una con un nombre y un enlace (href)
+let categorias = [
+  {
+      nombre: "Inicio",
+      href: "./index.html"
+  },
+  {
+      nombre: "Productos",
+      href: "./producto.html"
+  },
+  {
+      nombre: "Contacto",
+      href: "#"
+  }
+];
+
+// Array para almacenar el HTML del menú generado
+let menuItems = [];
+
+// Recorrer el array de categorías y generar el HTML para cada una
+for (let item of categorias) {
+  menuItems.push(`
+      <li class="nav-item">
+          <a class="nav-link" href="${item.href}">${item.nombre}</a>
+      </li>
+  `);
+}
+
+// Crear la estructura del navbar sin el buscador
+let menu = `
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Tienda</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+              ${menuItems.join('')}
+          </ul>
+      </div>
+  </div>
+</nav>
+`;
+
+// Insertar el menú en el DOM
+document.querySelector('header').innerHTML = menu;
+
+/*let menu = [
   {
       texto: "Contacto",
-      href: "/contact"
+      href: "/"
   },
   {
       texto: "Pantalones",
@@ -53,7 +101,7 @@ document.querySelector('header').innerHTML = (`
 
   </div> 
 `);
-
+*/
 /*let menu = [];
 
 let categories = [
@@ -97,10 +145,10 @@ for (let i of categories) {
 let navbarLeft = document.getElementById("menuLeft").innerHTML = menu[0]
 let navbarCenter = document.getElementById("menuCenter").innerHTML = menu.slice(1, 3).join("");
 let navbarRight = document.getElementById("menuRight").innerHTML = menu.slice(3, 5).join("");
+*/
 
-
-
-/*let menu = [
+/*
+let menu = [
     { texto: "Home", href: "./index.html" },
     { texto: "Producto", href: "./producto.html" },
     { texto: "Nosotros", href: "#" },
