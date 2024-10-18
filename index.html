@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce</title>
-
-    <!-- Bootstrap CSS para estilos -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Kumbh+Sans:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Kumbh+Sans:wght@100..900&display=swap"
+        rel="stylesheet">
+    <title>Las Carcachas</title>
 </head>
+
 <body>
-    <header></header>
-
-    <main class="container mt-4">
-        <form class="d-flex ms-auto" role="search">
-            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" id="search-input">
-            <button class="btn btn-outline-success" type="button" id="search-button">Buscar</button>
-            <button class="btn btn-outline-danger" type="button" id="clear-button">Limpiar</button>
-        </form>
-    
-        <div class="row mt-4" id="product-list">
-            <!-- Los productos se agregarán aquí -->
+        <div>
+            <input type="text" id="search-input" placeholder="Buscar por marca">
+            <button id="search">Buscar</button>
+            <button id="reset">Borrar</button>
         </div>
-    </main>
-
-    <!-- Scripts JS -->
-    <script src="navbar.js"></script>
-    <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <h1 class="text-warning text-center"></h1>
+        <div id="category-buttons">
+            <button class="category-btn" data-category="todos">Ver todos</button>
+            <button class="category-btn" data-category="Chevrolet">Chevrolet</button>
+            <button class="category-btn" data-category="Ford">Ford</button>
+            <button class="category-btn" data-category="Renault">Renault</button>
+            <button class="category-btn" data-category="Fiat">Fiat</button>
+        </div>
+        <section class="container d-flex flex-wrap justify-content-center"></section>
+        <ul id="result-list"></ul>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+        <script src="main.js"></script>
 </body>
+
 </html>
