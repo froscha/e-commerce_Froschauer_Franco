@@ -1,4 +1,70 @@
+
 let barra = [
+  { text: "Inicio", href: "/index.html" },
+  { text: "Productos", href: "/producto.html" },
+  { text: "Contacto", href: "/contact" },
+];
+
+const header = document.querySelector("header");
+let menu = [];
+
+for (let info of barra) {
+  const carta = `
+    <li class="nav-item hovnav">
+      <a class="nav-link" href="${info.href}">${info.text}</a>
+    </li>
+    
+  `;
+  menu.push(carta);
+}
+
+header.innerHTML = `
+  <nav class="navbar navbar-expand-lg bg-body-tertiary colo">
+    <div class="container-fluid">
+      <a class="navbar-brand hovnav" href="index.html">Las Carcachas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          ${menu.join("")}
+        </ul>
+        <li class="nav-item dropdown" style="list-style: none;">
+            <button type="button" class="btn dropdown-toggle hovnav" data-bs-toggle="dropdown" aria-expanded="false">
+                Marcas
+            </button>
+            <div id="category-buttons" class="d-grid gap-2 col-6 mx-auto">
+                <ul class="dropdown-menu">
+                    <button class="btn btn-primary category-btn dropdown-item" data-category="todos">Ver todos</button>
+                    <button class="btn btn-primary category-btn dropdown-item" data-category="Fiat">Fiat</button>
+                    <button class="btn btn-primary category-btn dropdown-item" data-category="Ford">Ford</button>
+                    <button class="btn btn-primary category-btn dropdown-item" data-category="Chevrolet">Chevrolet</button>
+                    <button class="btn btn-primary category-btn dropdown-item" data-category="Renault">Renault</button>
+                </ul>
+            </div>
+        </li>
+      </div>
+       <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar" id="search-input">
+            <button class="btn btn-outline-danger" type="button" id="search">Buscar</button>
+            <button class="btn btn-outline-danger" type="button" id="reset">Borrar</button>
+        </form>
+        <ul>
+        ${localStorage.getItem("email")
+    ? `<button class="btn btn-outline-danger" onclick="cerrarSesion()">Cerrar Sesion</button>` : `<a href="./login.html" class="btn btn-outline-danger" type="button">Cerrar sesión</a>`
+    }</ul >
+    </div >
+  </nav >
+  `;
+
+function cerrarSesion() {
+  localStorage.clear()
+  location.href = "./index.html"
+}
+
+
+
+/*let barra = [
   { texto: "Inicio", href: "./index.html" },
   { texto: "Productos", href: "./producto.html" },
   { texto: "Contacto", href: "./contact" },
@@ -26,12 +92,20 @@ header.innerHTML = `
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           ${menu.join("")}
+          <ul>${
+            localStorage.getItem("email")
+            ? `<span>${localStorage.getItem("email")}</span> | <span onclick="logout()">Cerrar Sesión</span>` : "2"
+          }
         </ul>
       </div>
     </div>
   </nav>
 `;
 
+function logout() {
+  localStorage.clear()
+  location.href = "./index.html"
+}
 
 /*
 
