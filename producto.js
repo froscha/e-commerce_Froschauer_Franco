@@ -1,4 +1,4 @@
-const carcachas = document.querySelector("main");
+const auto = document.querySelector("main");
 
 const data = [{
     id: 1,
@@ -81,20 +81,206 @@ const data = [{
     price: 5_000_000,
     stock: 38,
   },];
-
-
-const productos = data.map(
-  (producto) =>
-    `<div class="card d-flex align-items-center flex-column m-2" style="width: 45rem">
-       <h1 class="text-center">${producto.title}</h1>
-       <img class="imagen" src= "${producto.img}" alt="Imagen" width="55%">
-       <p class="text-center">${producto.detail}</p>
-       <strong>Precio: $${producto.price}</strong>
-       <span>Stock: ${producto.stock}</span>
-   </div>`
+  
+  
+const autos = document.querySelector("main");
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+function filtroCards(cards) {
+const productos = cards.map((producto) =>
+    `<div class="card mb-3 text-bg-dark d-flex justify-content-center">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <img class="imagen" src= "${producto.img}" alt="Imagen ${producto.id}" width=100% >
+        </div>
+        <div class="col-md-6 text-center align-items-center">
+          <div class="card-body">
+            <h5 class="card-title">${producto.title}</h5>
+            <p class="card-text">${producto.detail}</p>
+            <p class="card-text">Precio: ${producto.price}</p>
+            <p class="card-text">Stock: ${producto.stock}</p>
+          </div>
+        </div>
+    ${localStorage.getItem("email") ?
+      `<div class="input-group">
+          <button class="btn btn-outline-secondary mr-3" type="button" onclick="increaseItem(${producto.id})">+</button>
+          <input type="number" id="cantidad-${producto.id}" class="form-control" value="1" min="1" max="${parseInt(producto.stock.split(': ')[1])}" onchange="updateQuantity(${producto.id})"></input>
+          <button class="btn btn-outline-secondary ml-3" type="button" onclick="decreaseItem(${producto.id})">-</button>
+          <a href="#" class="enlace"><button type="button" class="btn btn-danger hovnav boton mx-2" onclick="addItems(${producto.id})">Agregar al Carrito</button></a>
+        </div>`
+      :
+      `<a href="login.html" class="enlace mx-4"><button type="button" class="btn btn-danger hovnav boton mx-4">Iniciar Sesión</a>`
+    } 
+    </div>
+    </div>`
 );
+autos.innerHTML = productos.join("");
+}
+function sprint() {
+  filtroCards(data);
+};
 
-carcachas.innerHTML = productos.join("");
+sprint();
+//Funcion para incrementar
+function increaseItem(id) {
+  const input = document.getElementById(`cantidad-${id}`);
+  const maxStock = parseInt(data.find(p => p.id === id).stock.split(': ')[1]);
+
+  if (input.value < maxStock) {
+    input.value = parseInt(input.value) + 1;
+  }
+};
+
+function decreaseItem(id) {
+  const input = document.getElementById(`cantidad-${id}`);
+
+  if (input.value > 1) {
+    input.value = parseInt(input.value) - 1;
+  }
+}
+function addItems(id) {
+
+
+  const input = document.getElementById(`cantidad-${id}`);
+  const cantidad = parseInt(input.value);
+  const producto = data.find(p => p.id === id);
+
+  if (cantidad < 1) return;
+
+  const existingProduct = cart.find(item => item.id === id);
+
+  if (existingProduct) {
+    existingProduct.quantity += cantidad;
+  } else {
+    cart.push({ ...producto, quantity: cantidad });
+  }
+
+  Swal.fire({
+    text: '¿Está seguro de agregar el producto al carrito?',
+    confirmButtonText: 'Si',
+    cancelButtonText: 'No',
+    showCancelButton: true,
+    showCloseButton: true,
+    confirmButtonColor: '#ab2415',
+    cancelButtonColor: '#24262b',
+  }).then(result => {
+    if (result.isConfirmed) {
+      add()
+    }
+  })
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartQuantity();
+}
+
+function updateCartQuantity() {
+  let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0)
+  localStorage.setItem("quantity", quantity)
+  const quantityTag = document.querySelector("#quantity")
+  if (quantityTag) {
+    quantityTag.innerText = quantity
+
+  }
+};
+updateCartQuantity();
+
+//FILTRO DE CATEGORIAS
+
+const buttonSearch = document.getElementById("search");
+const buttonReset = document.getElementById("reset");
+const input = document.getElementById("search-input");
+const ul = document.getElementById("result-list");
+const searchList = () => {
+  const filterData = data.filter((producto) => producto.title.toLowerCase().includes(input.value.toLowerCase()));
+  if (filterData.length > 0) {
+    filtroCards(filterData);
+  } else {
+    document.querySelector("section").innerHTML = "<p>No se encontraron resultados</p>";
+  }
+};
+
+const resetInput = () => {
+  input.value = "";
+  filtroCards(data);
+};
+
+
+const filterByCategory = (category) => {
+  const filteredData = category === "todos"?data: data.filter(producto => producto.category === category);
+  filtroCards(filteredData);
+};
+
+buttonSearch.addEventListener("click", searchList);
+buttonReset.addEventListener("click", resetInput);
+
+const categoryButtons = document.querySelectorAll(".category-btn");
+categoryButtons.forEach(button => {
+  button.addEventListener("click", () =>
+  filterByCategory(button.dataset.category));
+});
+  
+  /*const productos = data.map(
+    (producto) =>
+     
+         /*<h1 class="text-center">${producto.title}</h1>
+         <img class="imagen" src= "${producto.img}" alt="Imagen" width="55%">
+         <p class="text-center">${producto.detail}</p>
+         <strong>Precio: $${producto.price}</strong>
+         <span>Stock: ${producto.stock}</span>
+     </div>`*/
+     `<div class="card d-flex align-items-center flex-column m-2" style="width: 45rem">
+
+             <img class="imagen" src= "${producto.img}" alt="Imagen ${producto.id}" width=55% >
+              <h1>${producto.title}</h1>
+              <p class="text-center">${producto.detail}</p>
+              <p>${producto.price}</p>
+              <p>${producto.stock}</p>
+    ${localStorage.getItem("email") ?
+      `<div class="input-group">
+          <a href="#" style = "list-style : none"><button type="button"  onclick="addItems(${producto.id})">Agregar al Carrito</button></a>
+        </div>`
+      :
+      `<a href="login.html" class="enlace"><button type="button">Iniciar Sesión</a>`
+    } 
+    </div>
+    </div>`
+
+/*<button class="btn btn-outline-secondary" type="button" onclick="increaseItem(${producto.id})">+</button>
+      <input type="number" id="cantidad-${producto.id}" class="form-control" value="1" min="1" max="${parseInt(producto.stock.split(': ')[1])}" onchange="updateQuantity(${producto.id})"></input>
+      <button class="btn btn-outline-secondary" type="butt
+on" onclick="decreaseItem(${producto.id})">-</button>*/
+
+autos.innerHTML = productos.join("");
+
+function card(data) {
+  let main = document.querySelector("main")
+  const id = Number(window.location.search.split("#")[1])
+  const productos = data.find(car => car.id === id)
+}
+/*
+localStorage.getItem("email") ?
+`<div class="input-group">
+    <button class="btn btn-outline-secondary" type="button" onclick="increaseItem(${producto.id})">+</button>
+    <input type="number" id="cantidad-${producto.id}" class="form-control" value="1" min="1" max="${parseInt(producto.stock.split(': ')[1])}" onchange="updateQuantity(${producto.id})"></input>
+    <button class="btn btn-outline-secondary" type="button" onclick="decreaseItem(${producto.id})">-</button>
+    <a href="#" class="enlace"><button type="button" class="btn btn-danger hovnav boton" onclick="addItems(${producto.id})">Agregar al Carrito</button>
+  </div>`
+:
+`<a href="login.html" class="enlace"><button type="button" class="btn btn-danger hovnav boton">Iniciar Sesión</a>`
+*/
+
+card(data);
+
+const counter = document.querySelector("#producto.input-group input");
+
+function decreaseItem() {
+    if (Number(counter.value) > 1) {
+        counter.value = Number(counter.value) - 1;
+    }
+}
+
+function increaseItem() {
+    counter.value = Number(counter.value) + 1;
+}
 
 /*
 const data = [

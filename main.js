@@ -89,7 +89,89 @@ const data = [{
     category: "Chevrolet",
   },];
   
+  
+function filtroCards(cards) {
+  const h1 = document.querySelector("h1");
+  h1.innerText = "Productos";
 
+  const container = document.querySelector("section");
+
+  const cardHTML = cards.map((producto) => `<div class="card text-bg-dark d-flex align-items-center flex-column m-2" style="width: 18rem">
+             <img class="imagen" src= "${producto.img}" alt=Imagen ${producto.id} width=55% >
+                      <h5>${producto.title}</h5>
+                      <p class="text-center">${producto.detail}</p>
+                     <p>${producto.price}</p>
+                     <p>${producto.stock}</p>
+                    <a href="producto.html?prod=${producto.id}" class="btn btn-danger hovnav boton">Ver más</a>
+             </div>
+        `).join("");
+  container.innerHTML = cardHTML;
+};
+function sprint() {
+  filtroCards(data);
+};
+
+sprint();
+
+const buttonSearch = document.getElementById("search");
+const buttonReset = document.getElementById("reset");
+const input = document.getElementById("search-input");
+const ul = document.getElementById("result-list");
+const searchList = () => {
+  const filterData = data.filter((producto) => producto.title.toLowerCase().includes(input.value.toLowerCase()));
+  if (filterData.length > 0) {
+    filtroCards(filterData);
+  } else {
+    document.querySelector("section").innerHTML = "<p>No se encontraron resultados</p>";
+  }
+};
+
+const resetInput = () => {
+  input.value = "";
+  filtroCards(data);
+};
+
+
+const filterByCategory = (category) => {
+  const filteredData = category === "todos"?data: data.filter(producto => producto.category === category);
+  filtroCards(filteredData);
+};
+
+buttonSearch.addEventListener("click", searchList);
+buttonReset.addEventListener("click", resetInput);
+
+const categoryButtons = document.querySelectorAll(".category-btn");
+categoryButtons.forEach(button => {
+  button.addEventListener("click", () =>
+  filterByCategory(button.dataset.category));
+});
+//SPINNER
+let cargaCompleta = false;
+
+const spinnerContainer = document.getElementById('spinner-container')
+const contenidoContainer = document.getElementById('contenido')
+
+spinnerContainer.style.display = 'block';
+
+
+//PROMESAS
+const myPromise = new Promise ((resolve, reject) => {
+  setTimeout(() => {
+    resolve("ok")
+    }, 3000)
+  })
+myPromise.then(() => {
+  cargaCompleta = true;
+  spinnerContainer.style.display ='none'
+  filtroCards(data); // Llamamos a filtroCards cuando la promesa se resuelve
+}).catch(error => {
+  cargaCompleta = true;
+  console.log("Error:", error); // Manejo de errores en caso de que la promesa sea rechazada
+});
+  
+  
+  
+  /*
   function renderCards(cards) {
     const h1 = document.querySelector("h1");
     h1.innerText = "Productos";
@@ -146,7 +228,7 @@ const data = [{
     filterByCategory(button.dataset.category));
   });
 
-
+const promesa = new Promise((resolve, reject) => { setTimeout(() => {resolve ("bien");}, 3000)})
 
   /*
 

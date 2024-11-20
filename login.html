@@ -7,16 +7,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=DM+Serif+Text:ital@0;1&family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Kumbh+Sans:wght@100..900&family=Lexend+Deca:wght@100..900&family=Outfit:wght@100..900&family=Rubik+Wet+Paint&family=Silkscreen:wght@400;700&family=Yatra+One&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <style>
-        body {
-            display: grid;
-            place-items: center;
-            height: 100dvh;
-        }
-    </style>
+
     <title>Iniciar sesión</title>
 </head>
 
@@ -36,20 +30,28 @@
     </div>
 
     <script>
-        let form = document.querySelector("form");
-
+        let form = document.querySelector("form"); 
         const correctEmail = 'prueba@gmail.com'
         const correctPassword = '123'
 
         function validarFormulario(event) {
-
+            event.preventDefault()
             if (form.elements.email.value === correctEmail && form.elements.password.value === correctPassword) {
-                localStorage.setItem("email", "password");
+                localStorage.setItem(correctPassword, correctEmail);
                 window.location.href = "./index.html"
             }
             else {
                 alert('Usuario o Contraseña incorrectos');
-            }
+            }   
         };
         form.addEventListener("submit", validarFormulario);
+        const isAuthRedirectHome = () =>{
+    if(localStorage.getItem ("email")){
+        location.href = "./index.html"
+    }
+};
+isAuthRedirectHome()
     </script>
+
+</body>
+</html>
