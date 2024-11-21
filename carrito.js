@@ -102,7 +102,7 @@ function comprar() {
     .then(data => {
       Swal.fire({
 
-        text: `Gracias ${recurso.user}, registramos tu numero ${data.id}`,
+        text: `Gracias ${recurso.user}, hemos registrado tu orden número ${data.id}`,
         confirmButtonText: "Ok",
         confirmButtonColor: "#ab2415",
         cancelButtonColor: '#24262b',
@@ -113,7 +113,7 @@ function comprar() {
     })
     .catch(() => {
       Swal.fire({
-        text: `PROBLEMA!!`,
+        text: `Lo sentimos hubo un problema con tu compra, intenta más tarde`,
         confirmButtonText: "Ok",
         confirmButtonColor: "#ab2415",
       })
